@@ -4,6 +4,7 @@ ARG env
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirror.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
     && apk update \
+    && apk add composer \
     && apk add --virtual buildDeps autoconf gcc g++ make \ 
     && curl -fSL 'https://github.com/phpredis/phpredis/archive/4.2.0.tar.gz' -o redis-4.2.0.tar.gz \
     && mkdir -p /tmp/redis \
