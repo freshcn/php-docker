@@ -11,7 +11,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirror.tuna.tsinghua.edu.cn/g' /etc/apk/rep
     && tar -zvxf redis-4.2.0.tar.gz -C /tmp/redis --strip-components=1\
     && rm redis-4.2.0.tar.gz \
     && docker-php-ext-configure /tmp/redis \
-    && docker-php-ext-install -j$(nproc) pdo_mysql opcache /tmp/redis \
+    && docker-php-ext-install -j$(nproc) pdo_mysql opcache /tmp/redis sysvsem sysvmsg sysvshm \
     && rm -fr /tmp/redis \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && apk del buildDeps
