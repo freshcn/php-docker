@@ -7,7 +7,7 @@ RUN apt-get update
 WORKDIR /var/www/html/
 
 RUN cd /tmp \ 
-    && apt-get install -y libzip-dev \
+    && apt-get install -y libzip-dev librdkafka-dev \
     && curl -fsL https://github.com/websupport-sk/pecl-memcache/archive/4.0.4.tar.gz -o memcache.tar.gz \
     && mkdir -p /tmp/memcache \
     && tar -zvxf memcache.tar.gz -C /tmp/memcache \
@@ -16,5 +16,6 @@ RUN cd /tmp \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && pecl install swoole-4.4.4 \
     && pecl install redis-4.2.0 \
-    && docker-php-ext-enable swoole redis \
+    && pecl install rdkafka-3.1.2 \
+    && docker-php-ext-enable swoole redis rdkafka \
     && rm -fr /tmp/* 
